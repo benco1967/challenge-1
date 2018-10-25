@@ -31,3 +31,6 @@ npm-debug.log
 
 # client build folder
 ui/
+
+# avoid commiting secret
+config/development.yaml
