@@ -1,0 +1,9 @@
+{
+  "port": "PORT",
+  "host": "HOST",
+  "basePath": "BASEPATH",
+  "foursquare": {
+    "client_id": "FS_CLIENT_ID",
+    "client_secret": "FS_CLIENT_SECRET"
+  }
+}

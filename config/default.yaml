@@ -1,0 +1,8 @@
+name: challenge
+
+host: localhost
+port: 10010
+basePath: /
+
+foursquare:
+  v: "20181001"
