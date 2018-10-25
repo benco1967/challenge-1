@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "start_debug": "DEBUG=challenge:* nodemon server.js",
+    "test_api": "mocha test/*.js",
     "build": ""
   },
   "dependencies": {
@@ -18,6 +19,9 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "should": "^13.2.3",
+    "supertest": "^3.3.0"
   }
 }
