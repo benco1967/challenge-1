@@ -1,0 +1,6 @@
+<ul class="pois" *ngIf="pois.length !== 0">
+  <li *ngFor="let poi of pois">
+    <app-stars [id]="poi.id"></app-stars><span class="text">{{poi.name}}</span>
+  </li>
+</ul>
+<h3 *ngIf="pois.length === 0">Pas de POI disponible alentour</h3>

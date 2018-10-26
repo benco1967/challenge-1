@@ -38,6 +38,7 @@ const init = (server) => {
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
+  // Paramèttres et configuration
   server.set('host', config.get('host'));
   server.set('port', normalizePort(config.get('port')));
   server.set('basePath',  path.join('/', config.get('basePath')));
@@ -45,11 +46,22 @@ const init = (server) => {
   if (process.env.NODE_ENV !== 'test') server.use(routeLogger('combined'));
   server.use(express.json());
 
-  server.use('/ui/', express.static(path.join(__dirname, 'ui')));
-
+  // API
   const apiRouter = require('./routes/api');
   server.use('/api/1/', apiRouter);
 
+  // Client
+  server.use('/ui/', express.static(path.join(__dirname, 'ui')));
+  // si on demande une page qui n'existe pas on retourne sur l'accueil
+  server.use('/ui/*', (err, req, res, next) => {
+    res.redirect('/ui/');
+  });
+  // si on ne précise pas on est redirigé sur l'accueil de l'ihm
+  server.use('/', (req, res, next) => {
+    res.redirect('/ui/');
+  });
+
+  // Erreurs
   server.use(() => {
     throw new createError.NotFound();
   });

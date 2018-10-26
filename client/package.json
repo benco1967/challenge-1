@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --output-path ../ui",
-    "build_prod": "ng build --prod --output-path ../ui",
+    "build": "ng build --baseHref=/ui/ --output-path ../ui",
+    "build_prod": "ng build --baseHref=/ui/ --prod --output-path ../ui",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
