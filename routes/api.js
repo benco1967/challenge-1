@@ -11,11 +11,25 @@ const FOURSQUARE_CFG = config.get('foursquare');
 
 const catchFSErr = (err, next) => {
   errorLog(err);
-  if (err.response && err.response.status === 400) {
-    next(new createError.NotFound(err.response.data.meta.errorDetail));
+  if (err.response) {
+    switch (err.response.data.meta.errorType) {
+      // TODO améliorer les réponses d'erreur en fonction des erreurs retournées par l'api foursquare
+      case 'invalid_auth':
+        // Mauvaise authentification
+        next(new createError.Unauthorized(err.response.data.meta.errorDetail));
+        break;
+      case 'param_error':
+        // Mauvais id, ou autre paramètre
+        next(new createError.BadRequest(err.response.data.meta.errorDetail));
+        break;
+      default:
+        next(new createError.BadRequest(`unknow error, api say: ${err.response.data.meta.errorDetail}`));
+
+    }
   }
   else {
-    next(new createError.BadRequest());
+    // Erreur autre qui ne provient pas de l'api foursquare
+    next(new createError.BadRequest("unable to reach the foursquare api"));
   }
 };
 

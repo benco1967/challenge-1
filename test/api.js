@@ -93,7 +93,7 @@ describe('controllers api', () => {
           .get('/api/1/poi/invalid_id')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(404)
+          .expect(400)
           .end((err, res) => {
             should.not.exist(err);
             res.body.should.have.properties('status', 'message');
